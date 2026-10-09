@@ -1,0 +1,16 @@
+# build output and local state
+target/
+node_modules/
+dist/
+build/
+.DS_Store
+*.log
+
+# secrets must never be committed (see docs/security/secrets-policy.md)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+wallets.json
