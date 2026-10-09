@@ -1,6 +1,6 @@
 # SPEC-002: Signed events
 
-Status: Draft. Version 0.1. Depends on [SPEC-001](001-identity.md) and [SPEC-003](003-encoding.md). Vectors: [events-v1.json](../../spec/test-vectors/events-v1.json).
+Status: Draft. Version 0.2 (2026-10-09). Depends on [SPEC-001](001-identity.md) and [SPEC-003](003-encoding.md). Vectors: [events-v1.json](../../spec/test-vectors/events-v1.json).
 
 ## 1. Overview
 
@@ -14,7 +14,7 @@ Unsigned map (the signed message):
 |---|---|---|
 | `v` | uint | 1 |
 | `kind` | text | 1 to 64 bytes. Namespaced, for example `bucks.post.create`. |
-| `author` | bytes(16) | The Bucks ID. |
+| `author` | bytes(16) | The Bucks ID. MUST carry version nibble 8 and the RFC 9562 variant. |
 | `device` | bytes(16) | Id of the signing device in the author's identity log. |
 | `seq` | uint | Per-device counter starting at 0. |
 | `prev` | bytes(32) or null | Hash of this device's previous event. Null if `seq` is 0. |
@@ -22,9 +22,9 @@ Unsigned map (the signed message):
 | `ts` | uint | Milliseconds since the Unix epoch, as claimed by the signer. |
 | `payload` | bytes | At most 65,536 bytes. Interpretation depends on `kind`. |
 
-Wire form: the unsigned fields plus `sig` (bytes(64)). The signature is low-S ECDSA P-256 over the canonical encoding of the unsigned map, by the device key.
+Wire form: the unsigned fields plus `sig` (bytes(64)). The signature is low-S ECDSA P-256 over `bucks/event/v1 || 0x00 || canonical unsigned bytes` (SPEC-003 section 5), by the device key.
 
-`hash(event) = BLAKE3(wire form)`.
+`hash(event) = BLAKE3-derive-key("bucks 2026-10-09 event hash v1", wire form)`.
 
 ## 3. Verification
 
@@ -50,10 +50,9 @@ Rule E3 means that events signed by a device that was **later removed** stop ver
 - **Replay.** Re-sending a valid event is harmless: nodes identify events by hash and ignore duplicates.
 - **Confidentiality.** The payload is not encrypted by this spec. Private event types MUST encrypt end to end inside `payload` (REQ-DA-04).
 - **Size.** Limits bound memory and bandwidth. Nodes MUST enforce them before parsing deeply.
-- **No domain separation** (see SPEC-003 gaps).
 - **Metadata.** `author`, `device`, `kind`, `seq` and `ts` are visible to nodes. Designs that need metadata privacy must go beyond this spec.
 
-## 6. Known gaps (v0.1)
+## 6. Known gaps (v0.2)
 
 - No event type registry or payload schemas (planned SPEC-004).
 - No expiry or retention semantics ([OQ-10](../open-questions.md)).
@@ -62,4 +61,9 @@ Rule E3 means that events signed by a device that was **later removed** stop ver
 
 ## 7. Reference implementation
 
-`bucks-core` module `event` on the predecessor branch named in SPEC-001. Six event tests pass: valid and round-trip, tamper and wrong author and unknown device and bad context, removed device cannot backdate, stream gaps and reorder and forks, limits, and vectors. [Certain]
+`core/bucks-core` module `event`, with 7 event tests: valid and round-trip; tamper, wrong author, unknown device, bad context and wrong key; removed device cannot backdate; stream gaps, reorder and forks; limits; event signatures cannot be reused as operation signatures; vectors. Vectors are independently verified by `scripts/verify_vectors.py`. [Certain]
+
+## 8. History
+
+- 0.2: domain separation (ADR-0013); author ID bits checked.
+- 0.1: initial draft from the predecessor implementation.

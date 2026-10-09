@@ -1,6 +1,6 @@
 # SPEC-003: Deterministic encoding
 
-Status: Draft. Version 0.1. Used by [SPEC-001](001-identity.md) and [SPEC-002](002-events.md).
+Status: Draft. Version 0.2 (2026-10-09; v0.1 had no domain separation). Used by [SPEC-001](001-identity.md) and [SPEC-002](002-events.md).
 
 All signed and hashed structures are encoded as a strict subset of CBOR (RFC 8949) so that each structure has **exactly one** valid byte string.
 
@@ -48,11 +48,35 @@ A decoder MUST:
 
 Rule 5 makes every accepted structure unique and removes a class of signature-malleability and parser-differential attacks.
 
-## 5. Hashing and signing inputs
+## 5. Signing and hashing inputs (domain separation, ADR-0013)
 
-Hash function: BLAKE3 with 256-bit output. Signature algorithm: ECDSA over NIST P-256 with SHA-256 (see SPEC-001). The signed message is the canonical unsigned encoding of the structure.
+**Signatures.** ECDSA over NIST P-256 with SHA-256. The message is
+
+```
+message = tag || 0x00 || canonical encoding of the unsigned structure
+```
+
+| Object | Tag (ASCII) |
+|---|---|
+| Identity operation (SPEC-001) | `bucks/identity-op/v1` |
+| Event (SPEC-002) | `bucks/event/v1` |
+
+**Hashes.** BLAKE3 in key-derivation mode (`derive_key(context, input)`), 256-bit output, with exactly these context strings:
+
+| Purpose | Context string |
+|---|---|
+| Bucks ID derivation | `bucks 2026-10-09 identity id v1` |
+| Identity operation hash | `bucks 2026-10-09 identity op hash v1` |
+| Event hash | `bucks 2026-10-09 event hash v1` |
+| Short code | `bucks 2026-10-09 short code v1` |
+
+A new object type MUST get a new tag and new contexts, recorded here. A tag or context MUST NOT be reused for a different purpose.
 
 ## Known gaps
 
-- **No domain separation.** The signed message carries no prefix saying which protocol object it is. Operations and events are distinguishable by their fields and by the keys that sign them, but a signature made over arbitrary bytes by a key that is also exposed through a signing API could be misused. Recommendation: add a fixed prefix per object type before the first deployment. This is a protocol break relative to the current vectors; see [OQ-11](../open-questions.md).
 - No schema language is defined; field tables in each spec are authoritative.
+
+## History
+
+- 0.2: domain separation for signatures and hashes ([ADR-0013](../decisions/0013-domain-separation.md)). Protocol break; vectors regenerated.
+- 0.1: initial draft from the predecessor implementation.

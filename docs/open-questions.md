@@ -14,7 +14,7 @@ Status: Living. Each item names who decides and what it blocks. Close an item by
 | OQ-08 | Who runs the first nodes, and who pays? | Owner | M4 exit (two independent operators) | |
 | OQ-09 | Security owner and contact address | Owner | SECURITY.md, M0 exit | Until set, report through private repository reporting. |
 | OQ-10 | Retention and deletion in an append-only log (privacy law, user wishes) | Owner with counsel | SPEC-002, export | Likely design: erasure by encrypting payloads and discarding keys; references remain. |
-| OQ-11 | Add a domain-separation prefix to every signed object before first deployment? | Spec working group | M1 (vectors regenerate) | Recommendation: yes. A protocol break relative to the current vectors, cheap now and expensive later. |
+| OQ-11 | Add a domain-separation prefix to every signed object before first deployment? | Spec working group | M1 (vectors regenerate) | **Resolved** by [ADR-0013](decisions/0013-domain-separation.md): yes, for signatures and hashes. |
 | OQ-12 | Event type registry design and the first domain schemas | Spec working group | M5 | Start from the predecessor's data model for rides, orders and listings. |
 | OQ-13 | iOS push: acceptable privacy trade-off? | Owner | M5 | Apple's service is unavoidable on iOS. The design uses wake-only messages. |
 | OQ-14 | Predecessor Go node and Solidity contracts: reuse anything? | Reviewer | ADR-0009 revisit | Not reviewed in the audit that produced this repository. |

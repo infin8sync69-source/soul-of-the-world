@@ -45,7 +45,7 @@ Status: **Designed** means the mitigation is specified; **Open** means it is not
 | T-03 | Stolen or malicious rotation key takes over the identity | Thief, insider | Offline backup key; override window with priority (REQ-ID-08); social recovery. **Gap:** v0.1 lets any rotation key rotate all. | Open |
 | T-04 | Forged operation or event | Network, node | ECDSA signatures, canonical encoding, chain checks, low-S. | Built |
 | T-05 | Signature malleability changes an ID or hash | Network | ID excludes the signature; low-S required; canonical decoding. | Built |
-| T-06 | Cross-protocol signature reuse | Malicious user, node | Domain-separation prefix. **Gap:** not in v0.1. | Open |
+| T-06 | Cross-protocol signature reuse | Malicious user, node | Domain-separation tags on every signature and BLAKE3 contexts on every hash (ADR-0013). | Built |
 | T-07 | Backdated events from a removed device | Thief | Events from later-removed devices stop verifying. Cost: history needs a policy. | Built (policy open) |
 | T-08 | Directory withholds a revocation | Node | Clients consult several directories and take the longest valid chain; anchor directory roots to a public timestamp. | Designed |
 | T-09 | Node reads private messages | Node | End-to-end encryption inside event payloads; nodes see only metadata. | Designed |
@@ -57,12 +57,12 @@ Status: **Designed** means the mitigation is specified; **Open** means it is not
 | T-15 | The assistant is tricked into harmful actions | Malicious content | The assistant only proposes; deterministic validation; confirmation gate; scoped tools. | Designed |
 | T-16 | Malicious update or installer | Supply chain | Signed releases; pinned key; reproducible builds; transparency log later. | Designed |
 | T-17 | Compromised dependency | Supply chain | Locked dependencies, review of new dependencies, vulnerability scanning, minimal dependency policy. | Open |
-| T-18 | Secrets committed to repositories | Insider | Secret scanning in pre-commit and CI; rotation procedure; no real credentials in examples. | Open |
+| T-18 | Secrets committed to repositories | Insider | Secret scanning in CI (pinned gitleaks, full history); rotation procedure; no real credentials in examples. Pre-commit hook still to add. | Partly built |
 | T-19 | Push notification provider sees activity | Platform | Wake-only pushes with no content; user chooses the Android push path. | Designed |
 | T-20 | Phone-number onboarding links identity to a real-world identifier | Node, platform | Phone verification is an optional attestation with a salted hash, never the identity root. | Designed |
 | T-21 | Location tracking | Node, insider | Coarse location by default; precise only during an active ride or delivery; retention limits. | Designed |
 | T-22 | Rollback of the identity log by a node | Node | Clients remember the highest seen head and refuse to accept a shorter valid chain. | Designed |
-| T-23 | Denial of service through large or malformed input | Network | Size limits and bounded parsing before deep decode; fuzz tests. | Partly built |
+| T-23 | Denial of service through large or malformed input | Network | Size limits and bounded parsing before deep decode; property-based fuzz tests in CI. Coverage-guided fuzzing still to add. | Partly built |
 
 ## 5. Lessons from the predecessor audit (real incidents)
 

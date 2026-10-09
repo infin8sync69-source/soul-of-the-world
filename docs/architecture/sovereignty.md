@@ -28,6 +28,11 @@ The goal "not dependent on any corporate conglomerate" is made testable by class
 | iroh relays | Connectivity | A | Relays run by nodes. |
 | GitHub | Source hosting, CI | B | Mirror to a self-hosted forge. Releases are signed and pinned independently. |
 | Language model weights (Hugging Face) | Local assistant | B | Mirror blessed models to content-addressed storage on nodes. |
+| crates.io | Rust package source for the core | B | Lockfile committed; vendor dependencies into release builds; a registry mirror is possible. |
+| Rust crates in use: `p256` (RustCrypto), `blake3`, `bs58`, `thiserror`, `clap`, `serde_json`, `rand_core`, `proptest` (tests) | Core and CLI | A | Open-source, pinned by `core/Cargo.lock`. Additions need review (T-17). |
+| PyPI: `blake3`, `cryptography` | Independent vector verifier only (CI) | A | Pinned in `scripts/requirements-vectors.txt`. Not used by any product. |
+| GitHub Actions | CI runners | B | Every CI step is a plain script runnable locally or on a self-hosted runner. |
+| gitleaks (GitHub release binary) | Secret scanning in CI | A | Version and SHA-256 pinned in the workflow. |
 
 Dependencies from the predecessor projects that this project does **not** adopt: hosted backend-as-a-service for data and authentication, third-party phone-OTP identity providers as the identity root, cloud push as the only push path, cloud language-model APIs as defaults, hosted serverless key generation, public IPFS gateways as the only distribution path.
 
