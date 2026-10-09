@@ -2,7 +2,7 @@
 
 **One person, one identity, on devices they control, served by infrastructure nobody can switch off.**
 
-Soul of the World (working name; product name "Bucks", see [open question OQ-02](docs/open-questions.md)) is a local-first, decentralised software platform for identity, messaging, local commerce and mobility. It runs on phones, desktops and community-run nodes. Every person has a single global identifier that no company issues.
+Soul of the World is the project; **Bucks** is the product ([ADR-0015](docs/decisions/0015-naming.md)). It is a local-first, decentralised software platform for identity, messaging, local commerce and mobility. It runs on phones, desktops and community-run nodes. Every person has a single global identifier that no company issues.
 
 > **Status: early development (milestone M1).** The identity core and a development CLI exist with tests and independently verified test vectors. Nothing here is ready for real identities or real users. Documents carry a status (Draft, Accepted, Superseded) and claims are tagged by confidence. Read [docs/README.md](docs/README.md) for the map.
 
@@ -57,4 +57,4 @@ The CLI keeps keys in plain files. It is a development tool, not a wallet. See [
 
 ## Licence
 
-Not yet chosen. See [OQ-01](docs/open-questions.md). Until a licence file is added, all rights are reserved by the authors.
+Code: MIT OR Apache-2.0, at your option ([LICENSE-MIT](LICENSE-MIT), [LICENSE-APACHE](LICENSE-APACHE)). Documentation and specifications: CC BY 4.0 ([LICENSE-DOCS.md](LICENSE-DOCS.md)). Decision: [ADR-0014](docs/decisions/0014-licensing.md).

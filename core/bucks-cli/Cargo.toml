@@ -5,6 +5,7 @@ description = "Development CLI for the Bucks identity core. Stores keys in plain
 edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
+license = "MIT OR Apache-2.0"
 
 [[bin]]
 name = "bucks"

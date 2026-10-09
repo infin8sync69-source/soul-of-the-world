@@ -5,6 +5,7 @@ description = "Identity log, Bucks ID and signed events (SPEC-001..003 v0.2)"
 edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 p256.workspace = true
