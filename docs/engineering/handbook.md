@@ -63,7 +63,7 @@ A bug fix starts with a failing test.
 6. Dependency register check: any new external host or package source must appear in the register.
 7. **Build-output checks** for packaging-sensitive code (browser extensions, mobile apps): assert the structure of the built artifact (for example, content scripts contain no module imports; the app bundle includes only declared libraries). Source tests are not enough.
 
-Gates 2, 5, 6, 7 are added as soon as there is code to apply them to. Gate 1 exists now.
+Implemented now: gates 1 (`docs` workflow), 2 (`hygiene` workflow, gitleaks), 3 and 4 (`core` workflow), 5 (`scripts/check_repo.py`), plus an independent vector check. Not yet: gate 6 (dependency register check) and gate 7 (no packaged artifacts yet).
 
 ## 7. Code standards
 

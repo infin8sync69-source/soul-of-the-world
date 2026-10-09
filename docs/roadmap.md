@@ -13,14 +13,16 @@ M3 and M4 can proceed in parallel after M1 and M2. M5 needs M4.
 
 **Goal:** a repository others can contribute to without repeating the predecessors' mistakes.
 
-| Deliverable | Notes |
-|---|---|
-| Documentation set | This repository |
-| Test vectors committed | `spec/test-vectors` |
-| Documentation checker and CI | `scripts/check_docs.py`, workflow |
-| Secret scanning in pre-commit and CI | REQ-SE-01 |
-| Dependency register checked in CI | REQ-SO-01 |
-| Owner decisions: licence, name, security contact | [OQ-01, OQ-02, OQ-09](open-questions.md) |
+| Deliverable | Notes | Status |
+|---|---|---|
+| Documentation set | This repository | Done |
+| Test vectors committed | `spec/test-vectors` | Done |
+| Documentation checker and CI | `scripts/check_docs.py`, workflow | Done |
+| Secret scanning in CI | Pinned gitleaks over full history (REQ-SE-01) | Done |
+| Secret scanning pre-commit hook | REQ-SE-01 | Not started |
+| Repository hygiene check in CI | `scripts/check_repo.py` (size, binaries, gitlinks, symlinks, machine paths) | Done |
+| Dependency register checked in CI | REQ-SO-01 | Not started (register is maintained by hand) |
+| Owner decisions: licence, name, security contact | [OQ-01, OQ-02, OQ-09](open-questions.md) | Waiting on owner |
 
 **Exit:** all documents reviewed by one other person; CI green; no open blocker among OQ-01, OQ-02, OQ-09.
 
@@ -28,14 +30,15 @@ M3 and M4 can proceed in parallel after M1 and M2. M5 needs M4.
 
 **Goal:** the identity and event protocols exist as a tested Rust library and a command-line tool.
 
-| Deliverable | Notes |
-|---|---|
-| Resolve [OQ-11](open-questions.md) (domain separation) and regenerate vectors | Before any deployment |
-| Core crate: encoding, identity log, events, verification | Re-import and re-review the predecessor crate |
-| Fuzz tests for the decoder | T-23 |
-| CLI: create identity, add device, rotate, sign and verify event | For manual and automated testing |
-| Second implementation or independent review of the vectors | Spec acceptance rule |
-| Specs 001 to 003 at 0.2 with known gaps updated | |
+| Deliverable | Notes | Status |
+|---|---|---|
+| Resolve [OQ-11](open-questions.md) (domain separation) and regenerate vectors | ADR-0013 | Done |
+| Core crate: encoding, identity log, events, verification | `core/bucks-core`, re-reviewed port of the predecessor crate | Done |
+| Fuzz tests for the decoder | Property-based (proptest) in CI | Done; coverage-guided fuzzing not started |
+| CLI: create identity, add device, rotate, sign and verify event | `core/bucks-cli`, development keys only | Done |
+| Second implementation or independent review of the vectors | `scripts/verify_vectors.py`, verification side only | Done |
+| Specs 001 to 003 at 0.2 with known gaps updated | | Done |
+| Threat-model review and an external review of the specs | Needed for Accepted status | Not started |
 
 **Exit:** vectors reproduced by an independent check; SPEC-001..003 reviewed against the threat model; CI runs tests and fuzzers; no protocol break pending.
 

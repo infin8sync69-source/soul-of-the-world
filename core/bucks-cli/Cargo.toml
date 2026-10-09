@@ -1,0 +1,21 @@
+[package]
+name = "bucks-cli"
+version = "0.2.0"
+description = "Development CLI for the Bucks identity core. Stores keys in plain files: NOT for real identities."
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "bucks"
+path = "src/main.rs"
+
+[dependencies]
+bucks-core = { path = "../bucks-core" }
+p256.workspace = true
+rand_core.workspace = true
+serde_json.workspace = true
+clap.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

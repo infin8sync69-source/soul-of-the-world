@@ -1,0 +1,18 @@
+[workspace]
+members = ["bucks-core", "bucks-cli"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.80"
+publish = false
+
+[workspace.dependencies]
+p256 = { version = "0.13", features = ["ecdsa", "std"] }
+blake3 = "1"
+bs58 = "0.5"
+thiserror = "1"
+rand_core = { version = "0.6", features = ["getrandom"] }
+serde_json = "1"
+clap = { version = "4", features = ["derive"] }
+proptest = "1"

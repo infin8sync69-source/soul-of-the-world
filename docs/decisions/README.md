@@ -18,5 +18,6 @@ Use [template.md](template.md). Statuses: **Proposed**, **Accepted**, **Supersed
 | [0010](0010-local-first-ai.md) | Local-first AI; remote providers opt-in | Accepted |
 | [0011](0011-spec-first-with-vectors.md) | Specification first, with test vectors | Accepted |
 | [0012](0012-monorepo-and-trunk-based.md) | One repository, trunk-based development | Accepted |
+| [0013](0013-domain-separation.md) | Domain separation for every signature and hash | Accepted |
 
 "Accepted" here means accepted by the project owner's direction on 2026-10-09 as the working plan. Each ADR lists what would make us revisit it.

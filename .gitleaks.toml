@@ -1,0 +1,13 @@
+# Secret scanning configuration (docs/security/secrets-policy.md).
+[extend]
+useDefault = true
+
+[allowlist]
+description = """Published protocol test vectors contain public keys and TEST-ONLY secret keys
+derived from public labels. scripts/verify_vectors.py fails if any secret in them is not
+BLAKE3(label), so a real secret cannot hide here unnoticed."""
+paths = [
+  '''^spec/test-vectors/[^/]+\.json$''',
+  # Ignored build output (never committed; see .gitignore) contains compiled test keys.
+  '''(^|/)target/''',
+]

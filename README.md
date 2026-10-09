@@ -4,7 +4,7 @@
 
 Soul of the World (working name; product name "Bucks", see [open question OQ-02](docs/open-questions.md)) is a local-first, decentralised software platform for identity, messaging, local commerce and mobility. It runs on phones, desktops and community-run nodes. Every person has a single global identifier that no company issues.
 
-> **Status: documentation phase.** There is no production code in this repository yet. Everything here is a specification, a decision or a plan. Documents carry a status (Draft, Accepted, Superseded) and claims are tagged by confidence. Read [docs/README.md](docs/README.md) for the map.
+> **Status: early development (milestone M1).** The identity core and a development CLI exist with tests and independently verified test vectors. Nothing here is ready for real identities or real users. Documents carry a status (Draft, Accepted, Superseded) and claims are tagged by confidence. Read [docs/README.md](docs/README.md) for the map.
 
 ## Why this exists
 
@@ -37,12 +37,23 @@ The ecosystem this project grows from (six repositories and a desktop app) prove
 ```
 docs/            all documentation (this phase)
 spec/            normative test vectors and, later, schemas
-core/            Rust core: identity, events, store, sync        (not started)
+core/            Rust core and development CLI                   (identity and events done; store and sync not started)
 apps/            android, ios, desktop, web                       (not started)
 node/            the node binary and service modules              (not started)
 infra/           deployment, CI, release tooling                  (not started)
-scripts/         repository tooling (documentation checks today)
+scripts/         docs, hygiene and independent vector checks
 ```
+
+## Try it
+
+```
+cd core
+cargo test                       # unit, vector, property-fuzz and CLI end-to-end tests
+cargo run -q --bin bucks -- --home /tmp/demo id new --device-name phone
+python3 ../scripts/verify_vectors.py   # independent check (pip install -r ../scripts/requirements-vectors.txt)
+```
+
+The CLI keeps keys in plain files. It is a development tool, not a wallet. See [core/README.md](core/README.md).
 
 ## Licence
 

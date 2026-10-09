@@ -1,0 +1,31 @@
+name: core
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: core
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned toolchain (rust-toolchain.toml)
+        run: rustup show active-toolchain || rustup toolchain install
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Lint
+        run: cargo clippy --locked --all-targets -- -D warnings
+      - name: Test (unit, vectors, property fuzzing, CLI end to end)
+        run: cargo test --locked
+  vectors-independent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r scripts/requirements-vectors.txt
+      - name: Verify vectors with an independent implementation
+        run: python3 scripts/verify_vectors.py

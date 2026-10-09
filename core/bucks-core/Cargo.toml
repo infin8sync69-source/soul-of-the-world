@@ -1,0 +1,17 @@
+[package]
+name = "bucks-core"
+version = "0.2.0"
+description = "Identity log, Bucks ID and signed events (SPEC-001..003 v0.2)"
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+p256.workspace = true
+blake3.workspace = true
+bs58.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+proptest.workspace = true
