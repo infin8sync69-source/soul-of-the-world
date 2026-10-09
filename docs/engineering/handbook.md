@@ -21,7 +21,7 @@ Directories appear only when work in them starts. Empty placeholders are not com
 - Trunk-based. `main` is always releasable once code exists. Branch names: `type/short-topic` (`docs/identity-gaps`, `feat/core-events`).
 - Every change is a pull request with at least one reviewer who is not the author. Specs and security-sensitive code need a reviewer who has read the threat model.
 - Squash-merge. The squash title follows Conventional Commits.
-- Do not merge with failing CI. Do not merge your own change without a second reviewer, even for docs, until the team is large enough to relax this by an ADR.
+- Do not merge with failing CI. Do not merge your own change without a second reviewer, even for docs, except under the solo-maintainer rules of [ADR-0017](../decisions/0017-solo-maintainer-review.md).
 
 ## 3. Commit messages
 

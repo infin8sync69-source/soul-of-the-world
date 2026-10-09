@@ -43,4 +43,4 @@ A person installs the app on a phone, creates an identity in under a minute, sca
 
 ## The word "Soul"
 
-The predecessor desktop app used "Soul" for a per-install agent identity and persona. In this project, **Soul** names the user-facing AI assistant and its configurable values/persona layer. It is not an identity primitive and not a network admission rule. See the [glossary](glossary.md) and [OQ-05](open-questions.md).
+The predecessor desktop app used "Soul" for a per-install agent identity and persona. In this project, **Soul** names the user-facing AI assistant and its configurable values/persona layer. It is not an identity primitive and not a network admission rule. Decided in [ADR-0016](decisions/0016-soul-is-a-persona-not-a-gate.md); see also the [glossary](glossary.md).

@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Do **not** open a public issue for a vulnerability. Use GitHub's private vulnerability reporting for this repository (Security tab, "Report a vulnerability"). If that is unavailable, contact the repository owner privately through their GitHub profile. A dedicated security contact address is an open item ([OQ-09](docs/open-questions.md)).
+Do **not** open a public issue for a vulnerability. Use GitHub's private vulnerability reporting for this repository (Security tab, "Report a vulnerability"). If that is unavailable, contact the repository owner privately through their GitHub profile. The repository owner is the security contact during the solo-maintainer phase ([ADR-0017](docs/decisions/0017-solo-maintainer-review.md)); a dedicated address is still to be set ([OQ-09](docs/open-questions.md)).
 
 Include: affected component and version, impact, reproduction steps, and whether the issue is already public. Expect an acknowledgement within 3 working days. [Guessing: realistic for a small team; revisit when staffed.]
 

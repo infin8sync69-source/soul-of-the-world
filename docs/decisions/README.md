@@ -19,5 +19,9 @@ Use [template.md](template.md). Statuses: **Proposed**, **Accepted**, **Supersed
 | [0011](0011-spec-first-with-vectors.md) | Specification first, with test vectors | Accepted |
 | [0012](0012-monorepo-and-trunk-based.md) | One repository, trunk-based development | Accepted |
 | [0013](0013-domain-separation.md) | Domain separation for every signature and hash | Accepted |
+| [0014](0014-licensing.md) | Licensing: MIT OR Apache-2.0 for code, CC BY 4.0 for docs | Accepted |
+| [0015](0015-naming.md) | Names: project Soul of the World, product Bucks, protocol identifiers frozen | Accepted |
+| [0016](0016-soul-is-a-persona-not-a-gate.md) | Soul is a persona layer, never an admission rule | Accepted |
+| [0017](0017-solo-maintainer-review.md) | Review rules during the solo-maintainer phase | Accepted |
 
 "Accepted" here means accepted by the project owner's direction on 2026-10-09 as the working plan. Each ADR lists what would make us revisit it.
